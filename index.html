@@ -19,12 +19,33 @@
 <body>
   <div id="cesiumContainer"></div>
   <script>
-   var viewer = new Cesium.Viewer('cesiumContainer', {
-    imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
-        url : 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer'
-    }),
-    baseLayerPicker : false
+  var viewer = new Cesium.Viewer('cesiumContainer');
+var scene = viewer.scene;
+
+var instance = new Cesium.GeometryInstance({
+  geometry : new Cesium.RectangleGeometry({
+    rectangle : Cesium.Rectangle.fromDegrees(-100.0, 20.0, -90.0, 30.0),
+    vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
+  }),
+  attributes : {
+    color : new Cesium.ColorGeometryInstanceAttribute(0.0, 0.0, 1.0, 0.8)
+  }
 });
+
+var anotherInstance = new Cesium.GeometryInstance({
+  geometry : new Cesium.RectangleGeometry({
+    rectangle : Cesium.Rectangle.fromDegrees(-85.0, 20.0, -75.0, 30.0),
+    vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
+  }),
+  attributes : {
+    color : new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.8)
+  }
+});
+
+scene.primitives.add(new Cesium.Primitive({
+  geometryInstances : [instance, anotherInstance],
+  appearance : new Cesium.PerInstanceColorAppearance()
+}));
   </script>
 </body>
 </html>
