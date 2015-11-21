@@ -17,3 +17,24 @@ Loads migrant data tsv file, prints to json file that can be used in javascript 
 _filename_ is the path to the migrant data file **without** a file extension (it expects .tsv, will print to .json)
 
 _jsonspaces_ is the number of spaces to use while pretty printing to the json file, a value of 0 will not use pretty print
+
+### Data Format
+Notes:
+* A given shortname will appear three times in the entry keyed by itself (It appears as the key, as the value of
+  property `shortName` and once as a key in the `to` object, where its value will be 0)
+* Every shortname will appear as a key in every `to` property
+* a given longname only appears once in the data file, as the `longName` property of the corresponding entry
+* Migrant flow is denoted by ParentKey > ChildValue (`data[homeCountry].to[destinationCountry];`)
+
+```JSON
+{
+    "$SHORTNAME" : {
+        "shortName" : "$SHORTNAME",
+        "longName" : "$LONGNAME",
+        "to" : {
+            "$SHORTNAME" : 000,
+            "$SHORTNAME" : 000
+        }
+    }
+}
+```
