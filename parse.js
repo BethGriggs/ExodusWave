@@ -1,12 +1,17 @@
 /*jslint node:true */
 "use strict";
 module.exports = function (filename, jsonspace) {
-    var fs = require("fs"),
+    var output = {
+            "_v": "1.1.0",
+            meta: {},
+            data: {}
+        },
+        fs = require("fs"),
         file = fs.readFileSync(filename + ".tsv").toString(),
         fileLines = file.split("\n"),
         countryDef = fileLines[0],
         countryData = {},
-        countryDataString,
+        outputDataString,
         countryNumMap = [],
         countryDefElems;
 
@@ -22,6 +27,8 @@ module.exports = function (filename, jsonspace) {
         countryNumMap.push(name);
     });
 
+    output.meta.countries = 0;
+
     fileLines.map(function (line, num) {
         if (line === "") { // Handles trailing blank line
             return;
@@ -34,6 +41,8 @@ module.exports = function (filename, jsonspace) {
         countryData[shortName].shortName = shortName;
         countryData[shortName].to = {};
 
+        output.meta.countries += 1;
+
         elems = elems.splice(2);
         elems.map(function (data, num) {
             data = data.replace("\r", "");
@@ -41,11 +50,13 @@ module.exports = function (filename, jsonspace) {
         });
     });
 
+    output.data = countryData;
+
     if (jsonspace === 0) {
-        countryDataString = JSON.stringify(countryData);
+        outputDataString = JSON.stringify(output);
     } else {
-        countryDataString = JSON.stringify(countryData, null, jsonspace);
+        outputDataString = JSON.stringify(output, null, jsonspace);
     }
     
-    fs.writeFileSync(filename + ".json", countryDataString);
+    fs.writeFileSync(filename + ".json", outputDataString);
 };
