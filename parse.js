@@ -17,6 +17,7 @@ module.exports = function (filename, jsonspace) {
         if (num < 2) {
             return;
         }
+        name = name.trim();
         countryData[name] = {};
         countryNumMap.push(name);
     });
@@ -26,8 +27,8 @@ module.exports = function (filename, jsonspace) {
             return;
         }
         var elems = line.split("\t"),
-            longName = elems[0],
-            shortName = elems[1];
+            longName = elems[0].trim(),
+            shortName = elems[1].trim();
 
         countryData[shortName].longName = longName;
         countryData[shortName].shortName = shortName;
@@ -35,6 +36,7 @@ module.exports = function (filename, jsonspace) {
 
         elems = elems.splice(2);
         elems.map(function (data, num) {
+            data = data.replace("\r", "");
             countryData[shortName].to[countryNumMap[num]] = data;
         });
     });

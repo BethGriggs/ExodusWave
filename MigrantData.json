@@ -23432,7 +23432,7 @@
     }
   },
   "VGB": {
-    "longName": "Virgin Islands, British ",
+    "longName": "Virgin Islands, British",
     "shortName": "VGB",
     "to": {
       "AUS": "7",
@@ -37816,7 +37816,7 @@
     }
   },
   "PSE": {
-    "longName": "Palestinian Territory, Occupied ",
+    "longName": "Palestinian Territory, Occupied",
     "shortName": "PSE",
     "to": {
       "AUS": "2684",
