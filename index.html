@@ -19,33 +19,24 @@
 <body>
   <div id="cesiumContainer"></div>
   <script>
-  var viewer = new Cesium.Viewer('cesiumContainer');
-var scene = viewer.scene;
+      
+      // geolocation json
+      // to space positional
+      // make into plains onto cesium
+      // expand plains to wrap globe
+        var viewer = new Cesium.Viewer('cesiumContainer');
+        var scene = viewer.scene;
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('resources/testdata.json', {
+        stroke: Cesium.Color.HOTPINK,
+        fill: Cesium.Color.PINK,
+        strokeWidth: 3,
+        markerSymbol: '?'
+        }));
 
-var instance = new Cesium.GeometryInstance({
-  geometry : new Cesium.RectangleGeometry({
-    rectangle : Cesium.Rectangle.fromDegrees(-100.0, 20.0, -90.0, 30.0),
-    vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
-  }),
-  attributes : {
-    color : new Cesium.ColorGeometryInstanceAttribute(0.0, 0.0, 1.0, 0.8)
-  }
-});
-
-var anotherInstance = new Cesium.GeometryInstance({
-  geometry : new Cesium.RectangleGeometry({
-    rectangle : Cesium.Rectangle.fromDegrees(-85.0, 20.0, -75.0, 30.0),
-    vertexFormat : Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
-  }),
-  attributes : {
-    color : new Cesium.ColorGeometryInstanceAttribute(1.0, 0.0, 0.0, 0.8)
-  }
-});
-
-scene.primitives.add(new Cesium.Primitive({
-  geometryInstances : [instance, anotherInstance],
-  appearance : new Cesium.PerInstanceColorAppearance()
-}));
+        scene.primitives.add(new Cesium.Primitive({
+          geometryInstances : [instance, anotherInstance],
+          appearance : new Cesium.PerInstanceColorAppearance()
+        }));
   </script>
 </body>
 </html>
