@@ -1,14 +1,27 @@
-## TSV Parse
+## DATAPROC
+### Processing data and stuff
 
-Loads migrant data tsv file, prints to json file that can be used in javascript / extended later on when more data is available.
+There are two different sets of data being processed; the legacy migration tsv data and the population csv data set that has superseeded it.
 
-### How to use (Simple)
+Node scaffolds are found in the `bin` directory
+
+Processing scripts are found in the `lib` directory
+
+* `tsvparse.js` parses the format of `MigrantData.json`
+* `csvparse.js` is a generic parser for csv files that will turn one into a 2d array fo strings
+* `popmerge.js` does the bulk of the csv processing and merging
+
+Source data is stored in the `data` directory
+
+Aggregated and processed data is output to the `dist` directory
+
+### How to use (Simple) (OLD)
 
 1. Open a CLI
 2. Navigate to folder containing `run.js` and `parse.js`
 3. Invoke "node run" to process a file called `MigrantData.tsv` in the current directory
 
-### How to use (Advanced)
+### How to use (Advanced) (OLD)
 
 1. Create your scaffold node file
 2. Import parse.js with `var parse = require("./parse.js")`
@@ -19,22 +32,40 @@ _filename_ is the path to the migrant data file **without** a file extension (it
 _jsonspaces_ is the number of spaces to use while pretty printing to the json file, a value of 0 will not use pretty print
 
 ### Data Format
-Notes:
-* A given shortname will appear three times in the entry keyed by itself (It appears as the key, as the value of
-  property `shortName` and once as a key in the `to` object, where its value will be 0)
-* Every shortname will appear as a key in every `to` property
-* a given longname only appears once in the data file, as the `longName` property of the corresponding entry
-* Migrant flow is denoted by ParentKey > ChildValue (`data[homeCountry].to[destinationCountry];`)
 
 ```JSON
 {
-    "$SHORTNAME" : {
-        "shortName" : "$SHORTNAME",
-        "longName" : "$LONGNAME",
-        "to" : {
-            "$SHORTNAME" : 000,
-            "$SHORTNAME" : 000
+  "_v": "$SEMVER",
+  "meta": {
+    "$METAKEY": "$METAVALUE",
+    "...": "..."
+  },
+  "ref": {
+    "$COUNTRYCODE": {
+      "short": "$SHORTNAME",
+      "long": "$LONGNAME",
+      "code": "$COUNTRYCODE",
+      "region": "$REGION",
+    },
+    "...": "..."
+  },
+  "data": {
+    "$YEAR": {
+      "$COUNTRYCODE": {
+        "short": "$SHORTNAME",
+        "long": "$LONGNAME",
+        "code": "$COUNTRYCODE",
+        "region": "$REGION",
+        "population": "$POPULATION",
+        "to": {
+          "$COUNTRYCODE": 000,
+          "$COUNTRYCODE": 000,
+          "...": "..."
         }
-    }
+      },
+      "...": "..."
+    },
+    "...": "..."
+  }
 }
 ```
