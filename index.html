@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Use correct character set. -->
-  <meta charset="utf-8">
-  <!-- Tell IE to use the latest, best version. -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>The Exodus Wave!</title>
-  <script src="Build/Cesium/Cesium.js"></script>
-  <style>
-      @import url(Build/Cesium/Widgets/widgets.css);
-      html, body, #cesiumContainer {
-          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
-      }
-  </style>
+    <!-- Use correct character set. -->
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>The Exodus Wave!</title>
+    <script src="Build/Cesium/Cesium.js"></script>
+    <style>
+        @import url(Build/Cesium/Widgets/widgets.css);
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-  <div id="cesiumContainer"></div>
-  <script>
-      
-      // geolocation json
-      // to space positional
-      // make into plains onto cesium
-      // expand plains to wrap globe
+    <div id="cesiumContainer"></div>
+    <script>
+
+        // geolocation json
+        // to space positional
+        // make into plains onto cesium
+        // expand plains to wrap globe
         var viewer = new Cesium.Viewer('cesiumContainer');
         var scene = viewer.scene;
         viewer.dataSources.add(Cesium.GeoJsonDataSource.load('resources/testdata.json', {
-        stroke: Cesium.Color.HOTPINK,
-        fill: Cesium.Color.PINK,
-        strokeWidth: 3,
-        markerSymbol: '?'
+            stroke: Cesium.Color.HOTPINK,
+            fill: Cesium.Color.PINK,
+            strokeWidth: 3,
+            markerSymbol: '?'
         }));
-
-        scene.primitives.add(new Cesium.Primitive({
-          geometryInstances : [instance, anotherInstance],
-          appearance : new Cesium.PerInstanceColorAppearance()
-        }));
-  </script>
+        
+                
+        function drawNodeSphere(country, long, lat, height) {
+            var node = viewer.entities.add({
+                name : country + '-node',
+                position : Cesium.Cartesian3.fromDegrees(long, lat, height),
+                ellipsoid : {
+                    radii : new Cesium.Cartesian3(50000.0, 50000.0, 50000.0),
+                    material : Cesium.Color.BLUE
+                }
+            });
+        }
+        
+        function drawNodePin(country, long, lat, height) {
+            var nodePin = viewer.entities.add({
+                name : country + '-pin',
+                polyline : {
+                    positions : Cesium.Cartesian3.fromDegreesArrayHeights([long, lat, 0, long, lat, height]),
+                    width : 2,
+                    material : Cesium.Color.RED
+                }
+            });
+        }
+        
+        function drawNode(country, long, lat, height) {
+            drawNodeSphere(country, long, lat, height);
+            drawNodePin(country, long, lat, height);
+        }
+        
+        drawNode('Spain', -4.0, 40.0, 1000000);
+                                                    
+    </script>
 </body>
 </html>
