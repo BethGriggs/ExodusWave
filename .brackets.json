@@ -1,7 +1,0 @@
-{
-    "jscodehints.detectedExclusions": [
-        "C:/xampp/htdocs/ExodusWave/lib/tsvparse.js",
-        "C:/xampp/htdocs/ExodusWave/Source/Core/GeometryType.js",
-        "C:/xampp/htdocs/ExodusWave/Source/ThirdParty/Uri.js"
-    ]
-}
