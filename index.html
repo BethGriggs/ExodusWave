@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Use correct character set. -->
     <meta charset="utf-8">
@@ -11,15 +12,21 @@
     <script src="Build/Cesium/Cesium.js"></script>
     <style>
         @import url(Build/Cesium/Widgets/widgets.css);
-        html, body, #cesiumContainer {
-            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        html,
+        body,
+        #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
     </style>
 </head>
+
 <body>
     <div id="cesiumContainer"></div>
     <script>
-
         // geolocation json
         // to space positional
         // make into plains onto cesium
@@ -32,38 +39,49 @@
             strokeWidth: 3,
             markerSymbol: '?'
         }));
-        
-                
+
+
         function drawNodeSphere(country, long, lat, height) {
             var node = viewer.entities.add({
-                name : country + '-node',
-                position : Cesium.Cartesian3.fromDegrees(long, lat, height),
-                ellipsoid : {
-                    radii : new Cesium.Cartesian3(50000.0, 50000.0, 50000.0),
-                    material : Cesium.Color.BLUE
+                name: country + '-node',
+                position: Cesium.Cartesian3.fromDegrees(long, lat, height),
+                ellipsoid: {
+                    radii: new Cesium.Cartesian3(50000.0, 50000.0, 50000.0),
+                    material: Cesium.Color.BLUE
                 }
+
             });
-        }
-        
+
+            // TEST EVENT HANDLER
+            handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+            handler.setInputAction(function (movement) {
+                var pickedObject = scene.pick(movement.endPosition);
+                if (Cesium.defined(pickedObject) && (pickedObject.id === node)) {
+                    alert("Hover over node!");
+                }
+            }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        };
+
+
         function drawNodePin(country, long, lat, height) {
             var nodePin = viewer.entities.add({
-                name : country + '-pin',
-                polyline : {
-                    positions : Cesium.Cartesian3.fromDegreesArrayHeights([long, lat, 0, long, lat, height]),
-                    width : 2,
-                    material : Cesium.Color.RED
+                name: country + '-pin',
+                polyline: {
+                    positions: Cesium.Cartesian3.fromDegreesArrayHeights([long, lat, 0, long, lat, height]),
+                    width: 2,
+                    material: Cesium.Color.RED
                 }
             });
         }
-        
+
         function drawNode(country, long, lat, height) {
             drawNodeSphere(country, long, lat, height);
             drawNodePin(country, long, lat, height);
         }
-        
+
         drawNode('Spain', -4.0, 40.0, 1000000);
-                                                    
     </script>
     <script src=lib/arrow.js></script>
 </body>
+
 </html>
