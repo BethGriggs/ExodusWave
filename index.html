@@ -40,6 +40,22 @@
             markerSymbol: '?'
         }));
 
+        
+        // TEST: adds an event to an entity
+        function addMouseOverEvent(entity) {
+            // event handler
+            handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+            handler.setInputAction(function (movement) {
+                var pickedObject = scene.pick(movement.endPosition);
+                if (Cesium.defined(pickedObject) && (pickedObject.id === entity)) {
+                    
+                    //TODO ARROW FUNCTION 
+                    alert("Hover over node!");
+                    
+                }
+            }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        }
+
 
         function drawNodeSphere(country, long, lat, height) {
             var node = viewer.entities.add({
@@ -49,17 +65,10 @@
                     radii: new Cesium.Cartesian3(50000.0, 50000.0, 50000.0),
                     material: Cesium.Color.BLUE
                 }
-
             });
-
-            // TEST EVENT HANDLER
-            handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-            handler.setInputAction(function (movement) {
-                var pickedObject = scene.pick(movement.endPosition);
-                if (Cesium.defined(pickedObject) && (pickedObject.id === node)) {
-                    alert("Hover over node!");
-                }
-            }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            
+            // add mouseover event
+            addMouseOverEvent(node);
         };
 
 
