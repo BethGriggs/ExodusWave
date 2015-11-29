@@ -39,28 +39,23 @@
             strokeWidth: 1,
             markerSymbol: '?'
         }));
-
-
-        // TEST: adds an event to an entity
-        function addMouseOverEvent(entity) {
-            // event handler
-            handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-            handler.setInputAction(function (movement) {
-                var pickedObject = scene.pick(movement.endPosition);
-                if (Cesium.defined(pickedObject) && (pickedObject.id === entity)) {
-
-                    //TODO ARROW FUNCTION 
-                    alert("Hover over node!");
-
-                }
-            }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-        }
-        
-        
     </script>
     <script src="lib/ajax.js"></script>
     <script src=lib/arrow.js></script>
     <script src="lib/countryNodes.js"></script>
+    <script>
+     
+        // Event handler for country nodes
+        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+        handler.setInputAction(function (movement) {
+            var pickedObject = scene.pick(movement.endPosition);
+
+            //TODO add list of names
+            if (Cesium.defined(pickedObject) && pickedObject.id.name == "ESP") {
+                alert("Hover over spain");
+                };
+            } , Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    </script>
 </body>
 
 </html>
