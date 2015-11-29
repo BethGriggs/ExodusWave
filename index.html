@@ -36,11 +36,11 @@
         viewer.dataSources.add(Cesium.GeoJsonDataSource.load('resources/testdata.json', {
             stroke: Cesium.Color.HOTPINK,
             fill: Cesium.Color.PINK,
-            strokeWidth: 3,
+            strokeWidth: 1,
             markerSymbol: '?'
         }));
 
-        
+
         // TEST: adds an event to an entity
         function addMouseOverEvent(entity) {
             // event handler
@@ -48,49 +48,19 @@
             handler.setInputAction(function (movement) {
                 var pickedObject = scene.pick(movement.endPosition);
                 if (Cesium.defined(pickedObject) && (pickedObject.id === entity)) {
-                    
+
                     //TODO ARROW FUNCTION 
                     alert("Hover over node!");
-                    
+
                 }
             }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
         }
-
-
-        function drawNodeSphere(country, long, lat, height) {
-            var node = viewer.entities.add({
-                name: country + '-node',
-                position: Cesium.Cartesian3.fromDegrees(long, lat, height),
-                ellipsoid: {
-                    radii: new Cesium.Cartesian3(50000.0, 50000.0, 50000.0),
-                    material: Cesium.Color.BLUE
-                }
-            });
-            
-            // add mouseover event
-            addMouseOverEvent(node);
-        };
-
-
-        function drawNodePin(country, long, lat, height) {
-            var nodePin = viewer.entities.add({
-                name: country + '-pin',
-                polyline: {
-                    positions: Cesium.Cartesian3.fromDegreesArrayHeights([long, lat, 0, long, lat, height]),
-                    width: 2,
-                    material: Cesium.Color.RED
-                }
-            });
-        }
-
-        function drawNode(country, long, lat, height) {
-            drawNodeSphere(country, long, lat, height);
-            drawNodePin(country, long, lat, height);
-        }
-
-        drawNode('Spain', -4.0, 40.0, 1000000);
+        
+        
     </script>
+    <script src="lib/ajax.js"></script>
     <script src=lib/arrow.js></script>
+    <script src="lib/countryNodes.js"></script>
 </body>
 
 </html>
