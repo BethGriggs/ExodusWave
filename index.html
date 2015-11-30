@@ -9,9 +9,9 @@
     <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>The Exodus Wave!</title>
-    <script src="Build/Cesium/Cesium.js"></script>
+    <script src="Cesium/Cesium.js"></script>
     <style>
-        @import url(Build/Cesium/Widgets/widgets.css);
+        @import url(Cesium/Widgets/widgets.css);
         html,
         body,
         #cesiumContainer {
@@ -33,7 +33,7 @@
         // expand plains to wrap globe
         var viewer = new Cesium.Viewer('cesiumContainer');
         var scene = viewer.scene;
-        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('resources/testdata.json', {
+        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('data/testdata.json', {
             stroke: Cesium.Color.HOTPINK,
             fill: Cesium.Color.PINK,
             strokeWidth: 1,
@@ -53,7 +53,6 @@
                 for (var country in dataJson.data["1960"]) {
                     if (country == pickedObject.id.name) {
                         drawCountryArrowsSingleYear(dataJson, "1960", country);
-                       
                     }
                 }
             };

@@ -1,3 +1,21 @@
+/Apps/
+/ThirdParty/
+/Source/
+/Specs/
+/Build/
+
+server.js
+gulpfile.js
+package.json
+web.config
+logo.png
+favicon.ico
+CHANGES.md
+
+# ==========================
+# Misc Guff
+# ==========================
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
