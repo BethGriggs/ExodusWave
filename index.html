@@ -21,6 +21,9 @@
             padding: 0;
             overflow: hidden;
         }
+        .cesium-viewer-animationContainer svg{
+            visibility: hidden;
+        }
     </style>
 </head>
 
@@ -31,8 +34,16 @@
         // to space positional
         // make into plains onto cesium
         // expand plains to wrap globe
-        var viewer = new Cesium.Viewer('cesiumContainer');
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+            homeButton: false,
+            fullscreenButton: false,
+            baseLayerPicker: false,
+            geocoder: false,
+            timeline: false
+        });
+
         var scene = viewer.scene;
+
         viewer.dataSources.add(Cesium.GeoJsonDataSource.load('data/testdata.json', {
             stroke: Cesium.Color.HOTPINK,
             fill: Cesium.Color.PINK,
@@ -40,12 +51,13 @@
             markerSymbol: '?'
         }));
     </script>
+    <script src="lib/data.js"></script>
     <script src="lib/ajax.js"></script>
     <script src="lib/countryNodes.js"></script>
     <script src=lib/arrow.js></script>
 
     <script>
-        
+        dataHandler.init();
         // Event handler for country nodes
 //        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
 //        handler.setInputAction(function (movement) {
