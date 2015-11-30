@@ -44,17 +44,20 @@
     <script src=lib/arrow.js></script>
     <script src="lib/countryNodes.js"></script>
     <script>
-     
         // Event handler for country nodes
         handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
         handler.setInputAction(function (movement) {
             var pickedObject = scene.pick(movement.endPosition);
 
-            //TODO add list of names
-            if (Cesium.defined(pickedObject) && pickedObject.id.name == "ESP") {
-                alert("Hover over spain");
-                };
-            } , Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            if (Cesium.defined(pickedObject)) {
+                for (var country in dataJson.data["1960"]) {
+                    if (country == pickedObject.id.name) {
+                        drawCountryArrowsSingleYear(dataJson, "1960", country);
+
+                    }
+                }
+            };
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     </script>
 </body>
 
