@@ -46,19 +46,20 @@
 
     <script>
         
-        // Event handler for country nodes
-//        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-//        handler.setInputAction(function (movement) {
-//            var pickedObject = scene.pick(movement.endPosition);
-//
-//            if (Cesium.defined(pickedObject)) {
-//                for (var country in dataJson.data["1960"]) {
-//                    if (country == pickedObject.id.name) {
-//                        //SHOW relevant entities
-//                    }
-//                }
-//            };
-//        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        // event handler for country nodes
+        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+        handler.setInputAction(function (movement) {
+            var pickedObject = scene.pick(movement.endPosition);
+
+            if (Cesium.defined(pickedObject)) {
+                for (var country in dataJson.data["1960"]) {
+                    if (country == pickedObject.id.name) {
+                        console.log(country);
+                        countryArrows[country].show = true;
+                    }
+                }
+            };
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     </script>
 </body>
 
