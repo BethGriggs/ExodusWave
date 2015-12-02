@@ -21,6 +21,9 @@
             padding: 0;
             overflow: hidden;
         }
+        .cesium-viewer-animationContainer svg{
+            visibility: hidden;
+        }
     </style>
 </head>
 
@@ -31,8 +34,16 @@
         // to space positional
         // make into plains onto cesium
         // expand plains to wrap globe
-        var viewer = new Cesium.Viewer('cesiumContainer');
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+            homeButton: false,
+            fullscreenButton: false,
+            baseLayerPicker: false,
+            geocoder: false,
+            timeline: false
+        });
+
         var scene = viewer.scene;
+
         viewer.dataSources.add(Cesium.GeoJsonDataSource.load('data/testdata.json', {
             stroke: Cesium.Color.HOTPINK,
             fill: Cesium.Color.PINK,
@@ -40,26 +51,33 @@
             markerSymbol: '?'
         }));
     </script>
+    <script src="lib/data.js"></script>
     <script src="lib/ajax.js"></script>
     <script src="lib/countryNodes.js"></script>
     <script src=lib/arrow.js></script>
 
     <script>
-        
         // event handler for country nodes
+
         handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
         handler.setInputAction(function (movement) {
-            var pickedObject = scene.pick(movement.endPosition);
-
+        var pickedObject = scene.pick(movement.endPosition);
+    
             if (Cesium.defined(pickedObject)) {
                 for (var country in dataJson.data["1960"]) {
+                    
                     if (country == pickedObject.id.name) {
-                        console.log(country);
-                        countryArrows[country].show = true;
+                        if (!countryArrows[country].show) {
+                            countryArrows[country].show = true;
+                        }
+                    } 
+                    else {
+                        countryArrows[country].show = false;
                     }
                 }
             };
         }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        dataHandler.init();
     </script>
 </body>
 
