@@ -21,7 +21,8 @@
             padding: 0;
             overflow: hidden;
         }
-        .cesium-viewer-animationContainer svg{
+        
+        .cesium-viewer-animationContainer svg {
             visibility: hidden;
         }
     </style>
@@ -54,23 +55,9 @@
     <script src="lib/data.js"></script>
     <script src="lib/ajax.js"></script>
     <script src="lib/countryNodes.js"></script>
-    <script src=lib/arrow.js></script>
-
+    <script src=lib/arrows.js></script>
     <script>
         dataHandler.init();
-        // Event handler for country nodes
-//        handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
-//        handler.setInputAction(function (movement) {
-//            var pickedObject = scene.pick(movement.endPosition);
-//
-//            if (Cesium.defined(pickedObject)) {
-//                for (var country in dataJson.data["1960"]) {
-//                    if (country == pickedObject.id.name) {
-//                        //SHOW relevant entities
-//                    }
-//                }
-//            };
-//        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
     </script>
 </body>
 
