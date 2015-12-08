@@ -1,0 +1,19 @@
+{
+  "name": "exodus-wave",
+  "version": "1.0.0",
+  "description": "Exodus Wave migrant visualisation software",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=production node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BethGriggs/ExodusWave.git"
+  },
+  "author": "Louis Capitanchik, Bethany Griggs, Thomas Hewett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BethGriggs/ExodusWave/issues"
+  },
+  "homepage": "https://github.com/BethGriggs/ExodusWave#readme"
+}
