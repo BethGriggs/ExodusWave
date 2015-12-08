@@ -41,21 +41,21 @@
             baseLayerPicker: false,
             geocoder: false,
             timeline: false
-        });
+        });s
 
         var scene = viewer.scene;
 
         viewer.dataSources.add(Cesium.GeoJsonDataSource.load('data/testdata.json', {
-            stroke: Cesium.Color.HOTPINK,
-            fill: Cesium.Color.PINK,
-            strokeWidth: 1,
-            markerSymbol: '?'
+            fill: Cesium.Color.TRANSPARENT,
+            outlineColor: Cesium.Color.HOTPINK,
+            outlineWidth: 2000
         }));
     </script>
     <script src="lib/data.js"></script>
     <script src="lib/ajax.js"></script>
     <script src="lib/countryNodes.js"></script>
-    <script src=lib/arrows.js></script>
+    <script src="lib/arrows.js"></script>
+    <script src="lib/interface.js">script>
     <script>
         dataHandler.init();
     </script>
