@@ -86,7 +86,7 @@ preLoad = function (callback) {
 postLoad = function () {
     server = http.createServer(function (req, res) {
         var stream,
-            fullpath = path.join(__dirname, req.url),
+            fullpath,
             stat,
             match,
             property;
@@ -97,6 +97,8 @@ postLoad = function () {
         if (req.url.charAt(req.url.length - 1) === "/") {
             req.url = req.url.substring(0, req.url.length - 1); // Strip rogue slash
         }
+
+        fullpath = path.join(__dirname, req.url);
 
         // First check if the request was proxied,
         // then if any of the other variables are
