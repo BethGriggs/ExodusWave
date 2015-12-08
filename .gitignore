@@ -6,11 +6,11 @@
 
 server.js
 gulpfile.js
-package.json
 web.config
 logo.png
 favicon.ico
 CHANGES.md
+npm-debug.log
 
 # ==========================
 # Misc Guff
