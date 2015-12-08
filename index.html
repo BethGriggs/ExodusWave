@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>The Exodus Wave!</title>
     <script src="Cesium/Cesium.js"></script>
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/nouislider.min.css" rel="stylesheet">
     <style>
         @import url(Cesium/Widgets/widgets.css);
         html,
@@ -30,32 +32,15 @@
 
 <body>
     <div id="cesiumContainer" style="position:absolute;"></div>
-    <div id="slider" style="position:absolute;"></div>
-    <script>
-        // geolocation json
-        // to space positional
-        // make into plains onto cesium
-        // expand plains to wrap globe
-        var viewer = new Cesium.Viewer('cesiumContainer', {
-            homeButton: false,
-            fullscreenButton: false,
-            baseLayerPicker: false,
-            geocoder: false,
-            timeline: false
-        });
-
-        var scene = viewer.scene;
-
-        viewer.dataSources.add(Cesium.GeoJsonDataSource.load('data/testdata.json', {
-            fill: Cesium.Color.TRANSPARENT,
-            outlineColor: Cesium.Color.HOTPINK,
-            outlineWidth: 2000
-        }));
-    </script>
+    <div style="position:static; padding: 2em;">
+        <div id="slider" style="position:fixed; width: 10em;"></div>
+    </div>
+    <script src="lib/setup.js"></script>
     <script src="lib/data.js"></script>
     <script src="lib/ajax.js"></script>
     <script src="lib/countryNodes.js"></script>
     <script src="lib/arrows.js"></script>
+    <script src="lib/nouislider.min.js"></script>
     <script src="lib/interface.js"></script>
     <script>
         dataHandler.init();
