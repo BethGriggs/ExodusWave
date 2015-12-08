@@ -28,8 +28,9 @@
     </style>
 </head>
 
-<body>
-    <div id="cesiumContainer"></div>
+<body>      
+    <div id="cesiumContainer" style="position:absolute;"></div>
+    <button style="position:absolute;">ABUTTON!</button>
     <script>
         // geolocation json
         // to space positional
@@ -41,7 +42,7 @@
             baseLayerPicker: false,
             geocoder: false,
             timeline: false
-        });s
+        });
 
         var scene = viewer.scene;
 
