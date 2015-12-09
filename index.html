@@ -23,6 +23,31 @@
             overflow: hidden;
         }
         
+        #infoDisplay {
+            background-color: white;
+            border-radius: 5px;
+            border: #337ab7 solid 2px;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        #infoDisplay .header {
+            background-color: #337ab7;
+            width: 100%;
+            padding: 0.3em;
+            box-sizing: border-box;
+            color: white;
+        }
+        #infoDisplay-value {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 120%;
+            display: inline-block;
+        }
+
+        .header .to {
+
+        }
         .cesium-viewer-animationContainer svg {
             visibility: hidden;
         }
@@ -35,8 +60,13 @@
         <div id="year-slider" style="position:fixed; width: 10em;"></div>
     </div>
     
-      <div style="position:static; padding-top: 20em; padding-left:60em;">
-          <h1 id="testvalue" style="position:fixed;color:white;"></h1>
+    <div id="infoDisplay" style="position:absolute;">
+        <div class="header">
+            <span id="infoDisplay-from"></span>
+            <span class="to"> to </span>
+            <span id="infoDisplay-to"></span>
+        </div>
+        <span id="infoDisplay-value"></span>
     </div>
     <script src="lib/setup.js"></script>
     <script src="lib/data.js"></script>
