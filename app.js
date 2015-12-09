@@ -127,7 +127,6 @@ postLoad = function () {
                 } else if ((match = /\/data\/([a-zA-Z0-9\/\_\-]+)/.exec(req.url)) !== null) {
                     property = utils.getDeepVal(match[1].split("/"), data);
                     if (property !== null) {
-                        console.log(property);
                         if (typeof property === 'object') {
                             res.writeHead(200, {'Content-Type': 'application/json'});
                             res.end(JSON.stringify(property));
