@@ -4,7 +4,7 @@
   "description": "Exodus Wave migrant visualisation software",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js"
+    "start": "NODE_ENV=production node app.js 1>>access.log 2>>error.log"
   },
   "repository": {
     "type": "git",

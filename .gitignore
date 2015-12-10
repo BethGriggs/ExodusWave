@@ -10,7 +10,7 @@ web.config
 logo.png
 favicon.ico
 CHANGES.md
-npm-debug.log
+*.log
 
 # ==========================
 # Misc Guff
